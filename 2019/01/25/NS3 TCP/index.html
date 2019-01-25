@@ -7,21 +7,19 @@
   
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="计算机网络开题报告 华中科技大学电信学院 问题1）：为什么我想研究低速TCP目标拒绝服务攻击？ 回答：拒绝服务攻击对全球网络间基础设施构成了越来越大的威胁。虽然TCP的拥塞控制算法对于各种网络条件具有高度鲁棒性，但其对终端系统协作的隐含假设导致众所周知的易受高速率无响应流攻击的漏洞。我们研究一类低速率拒绝服务攻击，与高速率攻击不同，路由器和反DoS机制难以检测。我们希望通过研究对这种低速Dos攻击">
+  <meta name="description" content="Low Rate TCP-Targeted Denial of Service Attack                                                                                                    Low Rate TCP-Targeted DoS Attack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://yoursite.com/2019/01/25/NS3 TCP/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="计算机网络开题报告 华中科技大学电信学院 问题1）：为什么我想研究低速TCP目标拒绝服务攻击？ 回答：拒绝服务攻击对全球网络间基础设施构成了越来越大的威胁。虽然TCP的拥塞控制算法对于各种网络条件具有高度鲁棒性，但其对终端系统协作的隐含假设导致众所周知的易受高速率无响应流攻击的漏洞。我们研究一类低速率拒绝服务攻击，与高速率攻击不同，路由器和反DoS机制难以检测。我们希望通过研究对这种低速Dos攻击">
+<meta property="og:description" content="Low Rate TCP-Targeted Denial of Service Attack                                                                                                    Low Rate TCP-Targeted DoS Attack">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="file:///C:/Users/yumen/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg">
-<meta property="og:image" content="file:///C:/Users/yumen/AppData/Local/Temp/msohtmlclip1/01/clip_image004.png">
-<meta property="og:image" content="file:///C:/Users/yumen/AppData/Local/Temp/msohtmlclip1/01/clip_image006.jpg">
-<meta property="og:updated_time" content="2019-01-25T05:50:36.499Z">
+<meta property="og:image" content="http://yoursite.com/2019/01/25/NS3%20TCP/topology.png">
+<meta property="og:updated_time" content="2019-01-25T12:05:00.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="计算机网络开题报告 华中科技大学电信学院 问题1）：为什么我想研究低速TCP目标拒绝服务攻击？ 回答：拒绝服务攻击对全球网络间基础设施构成了越来越大的威胁。虽然TCP的拥塞控制算法对于各种网络条件具有高度鲁棒性，但其对终端系统协作的隐含假设导致众所周知的易受高速率无响应流攻击的漏洞。我们研究一类低速率拒绝服务攻击，与高速率攻击不同，路由器和反DoS机制难以检测。我们希望通过研究对这种低速Dos攻击">
-<meta name="twitter:image" content="file:///C:/Users/yumen/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg">
+<meta name="twitter:description" content="Low Rate TCP-Targeted Denial of Service Attack                                                                                                    Low Rate TCP-Targeted DoS Attack">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/25/NS3%20TCP/topology.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -68,7 +66,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-NS3 TCP" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-NS3 TCP" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/25/NS3 TCP/" class="article-date">
   <time datetime="2019-01-25T05:51:32.599Z" itemprop="datePublished">2019-01-25</time>
@@ -80,69 +78,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>计算机网络开题报告</p>
-<p>华中科技大学电信学院</p>
-<p>问题1）：为什么我想研究低速TCP目标拒绝服务攻击？</p>
-<p>回答：拒绝服务攻击对全球网络间基础设施构成了越来越大的威胁。虽然TCP的拥塞控制算法对于各种网络条件具有高度鲁棒性，但其对终端系统协作的隐含假设导致众所周知的易受高速率无响应流攻击的漏洞。我们研究一类低速率拒绝服务攻击，与高速率攻击不同，路由器和反DoS机制难以检测。我们希望通过研究对这种低速Dos攻击的能力进行基本限制。</p>
-<p>参考文献：”Low-Rate TCP-Targeted Denial of Service Attacks (The Shrew vs. the Mice and Elephants)” by Aleksandar Kuzmanovic and Edward W. Knightly</p>
-<p>问题2）：其他人已经做了什么工作？</p>
-<p>回答：(1) Allman和Paxson通过实验得出TCP进入重传超时的条件。主要研究问题为超时值的选择需要两个极限之间的平衡超时值太低和太高时的解决方法。</p>
-<p>(2) Ryan Propper和Yutian Li得出攻击依赖于非常谨慎的计时 改变攻击周期T（即后续数据包突发的开始时间之间的差距）对单个目标流的吞吐量的影响。</p>
-<p>(3) Luo 等人2005 年 ，在Internet2的Abilene 骨干网上发现了脉冲式拒绝服务攻击 ，脉冲式拒绝服务攻击 成为现实。</p>
-<p>参考文献：”Low-Rate TCP-Targeted Denial of Service Attacks (The Shrew vs. the Mice and Elephants)” by Aleksandar Kuzmanovic and Edward W. Knightly</p>
-<p>问题3）：我们的想法是什么？</p>
-<p><img src="file:///C:/Users/yumen/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg" alt="img"></p>
-<p>图1：DoS场景和系统模型</p>
-<p><img src="file:///C:/Users/yumen/AppData/Local/Temp/msohtmlclip1/01/clip_image004.png" alt="img"></p>
-<p>图2：Dos流方波</p>
-<p>我们提供这种攻击的场景和系统模型，开发一个简单的聚合TCP吞吐量模型，作为DoS流量参数的函数。</p>
-<p>考虑图1所示的攻击场景。它由单个瓶颈队列组成，该队列由具有异构RTT和单个DoS流的长寿命TCP流驱动。将RTTi表示第i个TCP流的往返时间，i = 1，…，n。DoS流是图2中所示的周期性方波DoS流。以下结果将TCP流的吞吐量与攻击周期相关联。</p>
-<p>DoS TCP吞吐量结果：考虑周期为T的周期性DoS攻击。</p>
-<p>如果中断持续时间满足</p>
-<p>(C1) l‘&gt;RTTi</p>
-<p>并且最小RTO满足</p>
-<p>(C2) minRTO &gt;SRTTi+4*RTTVARi</p>
-<p>对于所有i = 1，…，n，则聚合TCP流的归一化吞吐量近似为</p>
-<p>等式：<img src="file:///C:/Users/yumen/AppData/Local/Temp/msohtmlclip1/01/clip_image006.jpg" alt="img"></p>
-<p>如图1所示，周期性l-length突发造成短l’-length中断，具有高丢包率。如果l’达到TCP流量的RTT时间尺度，即l’）&gt; RTTi，对于所有i = 1，…，n，然后由DoS突发引起的拥塞持续足够长以迫使所有TCP流同时进入超时。此外，如果minRTO&gt; SRTTi + 4 * RTTVARi，对于i = 1，…，n，所有TCP流将具有相同的RTO值，因此将在minRTO秒后超时，这是攻击者创建新的停运。因此，在这种情况下，尽管它们具有异构的往返时间，但是所有TCP流都被迫与攻击者“同步”并在（几乎）同时进入超时，并且尝试在（几乎）同时恢复。因此，当暴露于具有周期T的中断时，接下来是等式。另请注意，在等式中，我们不会模拟由于慢启动阶段导致的吞吐量损失，而只是假设TCP流在退出超时阶段后利用所有可用带宽。</p>
-<p>此外，在该模型中，假设聚合TCP流量在每次重传超时结束和下一次中断开始之后利用全链路带宽。观察到如果选择周期T使得T&gt; 1 + 2RTTi，则所有TCP流将连续进入1秒持续时间的重传超时。因此，因为等式假设RTO = minRTO用于T&gt; minRTO，而在周期中不是这种情况（minRTO，minRTO + 2RTT），等式在实践中表现为上限。换句话说，周期性DoS流不是利用TCP的指数退避机制，而是利用重复的超时。</p>
-<p>接下来，我们考虑不满足条件（C1）或（C2）的流量。</p>
-<p>DoS TCP流量过滤结果。考虑周期为T的周期性DoS攻击。如果中断持续时间l’&gt; RTTi并且 minRTO&gt; SRTTi + 4 <em> RTTVARi(i = 1，…，k) l‘&lt;RTT或者 minRTO &lt;SRTTJ + 4 </em> RTTVARJ (J= k + 1，…，n)则等式适用于流1，…，k。</p>
-<p>与上述类似地示出的该结果表明该等式适用于条件（C1）和（C2）成立的任何TCP子集合。换句话说，如果在一组流上启动泼妇DoS攻击，使得仅一个子集满足这两个条件，则该子集将根据等式获得降级的吞吐量，而其余流不会。我们将此称为“流过滤”，因为此类攻击将拒绝对流的子集的服务，同时使其余部分不受影响，甚至获得更高的吞吐量。</p>
-<p>问题4)：我们设计了什么实验验证想法？</p>
-<p>回答：１、在具有共享瓶颈链路的异构-RTT聚合流的简化模型中，我们得出攻击流的吞吐量的表达式作为DoS流的时间尺度的函数，并且因此导出DoS流的平均速率的函数。此外，我们推导出“最优”DoS流量模式（两级周期性方波），该模式最小化了受害者给定TCP吞吐量水平的平均速率，包括零吞吐量。</p>
-<p>２、接下来，我们使用ns-2模拟来探索聚合和异质性对泼妇攻击有效性的影响。</p>
-<p>３、在本地和广域环境中执行一组Internet实验。虽然必然是小规模实验（假设预期结果是将TCP吞吐量降低到接近零），但实验验证了基本结果，并表明即使远程攻击者（通过WAN）也可以显着降低TCP吞吐量</p>
-<p>４、我们探索低速率DoS攻击的潜在解决方案，考虑一类随机化技术，其中流随机选择minRTO的值，使得它们具有随机零频率。我们使用分析建模和模拟的组合来表明这样的策略只能扭曲并略微缓解TCP对泼妇攻击的频率响应。此外，我们设计了一个最佳的DoS攻击，因为流量正在使他们的RTO随机化，并表明这种攻击仍然非常严重。</p>
-<p>实验5）：我们已经完成了什么？</p>
-<p>回答：我们展示了通过利用TCP的重传超时机制，TCP当与恶意选择的多路复用时，表现出零频率周期性DoS流。</p>
-<p>我们开发了几种DoS流量模式（包括最低费率一）并通过分析的组合建模，广泛的模拟和互联网验</p>
-<p>我们证明了（1）低速DoS攻击是成功的针对短期和长期TCP聚合，从而代表对当今互联网的现实威胁; （2）在异构RTT中环境，攻击的成功是加重的更短的RTT流量; （3）低速周期性开环流，均匀如果没有恶意生成，可能对短RTT非常有害TCP流量，如果它们的周期与其中一个空TCP频率匹配;</p>
-<p>（4）网络路由器（RED-PD）和基于端点的机制只能减轻但不能消除有效性攻击潜在的漏洞不是由于DoS设计不佳造成的检测或TCP超时机制，而是固有的由防御和攻击时间尺度不匹配引起的权衡。因此，要在存在的情况下完全保护系统这样的攻击，必然会有很大的牺牲他们缺席时的系统性能</p>
-<p>实验6）：我们的实验面临的困难？拟如何解决？</p>
-<p>回答：困难：模拟成功所需的参数、TCP拥塞控制算法、方波的突发和周期、诸如minRTO的TCP选项</p>
-<p>解决方法：原理分析、公式计算、建模调试</p>
-
+        <html><br><br><head><meta name="generator" content="Hexo 3.8.0"><br>    <title><br>        Low Rate TCP-Targeted Denial of Service Attack<br>    </title><br><br>    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><br>    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"><br>    <link rel="stylesheet" href="./css/main.css"><br><br><br>    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><br>    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><br>    <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-full.js"></script><br><br>    <script src="./js/main.js"></script><br>    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-full.min.js" canvas="myCanvas"><br>    </script><br></head><br><br><body><br>    <div class="container"><br>        <div class="row heading"><br>            <div class="box-heading"><br>                <h1><br>                    Low Rate TCP-Targeted DoS Attack<br>                </h1><br>            </div><br>        </div><br>        <div class="menu"><br>            <a class="active" href="index.html"><i class="fa fa-home"></i> Home</a><br>            <a href="animate.html"><i class="fa fa-play"></i> Animation</a><br>            <a href="graphs.html"><i class="fa fa-line-chart"></i> Graphs</a><br>            <a href="https://www.github.com/samvid25/Low-Rate-TCP-DoS-Attack" target="_blank" rel="noopener"><i class="fa fa-github"></i> Source</a><br>        </div><br>        <hr><br>        <div id="procedure" class="round-box"><br>            <h2>Overview</h2><br>            <p><br>                The following contains a brief documentation about the implementation of Low Rate TCP-Targeted DoS Attack in ns-3 (Network Simulator) as described in the paper titled <a href="http://oriolrius.cat/article_fitxers/326/pdf/p75-kuzmanovic.pdf" target="_blank" rel="noopener">“Low-Rate TCP-Targeted Denial of Service Attacks (The Shrew vs. the Mice and Elephants)”</a> by Aleksandar Kuzmanovic and Edward W. Knightly. You can find the source code <a href="https://github.com/samvid25/Low-Rate-TCP-DoS-Attack" target="_blank" rel="noopener">here</a>.<br>                The results of our experiment on ns-3 have been shared on this page.<br>            </p><br>        </div><br>        <hr><br>        <div id="procedure" class="round-box"><br>            <h2>Steps</h2> <br><br>            <ul><br>                <li> Initially, the following topology is set-up. </li><br>                <p align="center"><br>                    <img src="./topology.png" alt="Topology"><br>                </p><br>                <li> The legitimate sender runs a TCP Bulk Send application (simulating an actual TCP transfer). </li><br>                <li> The attacker node runs a UDP On Off application (simulating the periodic bursts). </li><br>                <li> The receiving node just has a TCP and UDP sink running to receive the segments/datagrams. </li><br>                <li> Once the link and node parameters are defined, and the topology is set up, the start and stop times of the applications and the frequency of the attacker bursts must be defined. </li><br>                <li> The frequency of the attacker bursts can be varied by setting the ‘OnTime’ and ‘OffTime’ attributes of the OnOff Helper. The attack gives the best results at OnTime = 0.25s and OffTime = 0.75s. </li><br>                <li> All the applications except the Bulk Send application start at time t = 0. The Bulk Send application on the sender node will start at a time equal to the OffTime of the UDP On-Off application on the attacker. This is because the UDP OnOff<br>                    application is initially in the Off state. This makes sure that both the sender and attacker effectively start at the same time. </li><br>                <li> The data rate for the attacker application must be set so that it saturates the bottleneck link in the duration that it is on (OnTime). </li><br>            </ul><br>        </div><br>        <br><br>        <hr><br>        <div id="description" class="round-box"><br>            <h2>Explanation</h2><br>            <p><br>                DoS attacks can be detected by counter-DoS mechanisms such as CouldFlare due to their high data rate. Here, we simulate a ‘Low-Rate TCP targetted DoS attack’ which is harder to detect as compared to the traditional DoS attacks.<br>                <br> These low-rate DoS attacks make use of the TCP congestion control’s Retransmission TimeOut (RTO) functionality to reduce communication between a sender and a receiver. Instead of flooding the network with continuous or large traffic,<br>                as in a normal DoS attack, we ‘time’ these floods such that they congest the network right when the TCP sender retransmits when there is a packet loss. This will lead to the sender waiting for another RTO period, after which this flood<br>                repeats again. These bursts have a data rate just sufficient enough to congest the bottleneck link that is present between the sender and the receiver. Since the bursts take place for a very small duration, the average data rate isn’t<br>                expected to reach a value that can be detected.<br>                <br> Hence by carefully timing these attack bursts, we can evade counter-DoS mechanisms, and at the same hinder communication between the TCP sender and receiver.<br>            </p><br>            <p><br>                Note the way the current RTO value changes. In the TCP used, that is, TCP New Reno, RTO value is expected to double everytime a lost packet is retransmitted. That is, assume as a certain point of time, it has RTO value equal to that of minRTO value, that<br>                is, 1 second. Then the subsequent RTO values for every packet retransmitted will be 2,4,8,16 ..so on. However once, an acknowledgement is successfully received RTO value is set back to the value calculated by the formula:<br>                </p><p style="margin-left: 15px;"><br>                    <i>RTO</i> = max(<i>minRTO</i>,<i>SRTT</i> + max(<i>G</i>,4*<i>RTTVAR</i>))<br>                </p><br>                where minRTO is decided by the type of TCP and the system the TCP runs on, SRTT refers to Smoothed Round-Trip Time (calculated from measured RTT) and RTTVAR refers to Round-Trip Time Variation.<br>            <p></p><br>            <p><br>                One way to launch a very successful attack is to time the attacker bursts at the exact time the sender is about to send some packets. The animation above shows a similar scenario.<br>            </p><br>        </div><br>        <hr><br>    </div><br></body><br><br></html>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/25/NS3 TCP/" data-id="cjrbmq1z6000058vu76mde3n0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/25/NS3 TCP/" data-id="cjrbzz7tj00001kvu3v7f9t5w" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
     
-<nav id="article-nav">
-  
-  
-    <a href="/2019/01/10/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -176,10 +122,6 @@
         
           <li>
             <a href="/2019/01/25/NS3 TCP/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/10/hello-world/">Hello World</a>
           </li>
         
       </ul>
